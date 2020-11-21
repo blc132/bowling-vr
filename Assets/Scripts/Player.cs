@@ -8,12 +8,11 @@ public class Player : MonoBehaviour
     public float ballDistance = 2.5f;
     public float ballThrowingForce = 200f;
 
-    private bool holdingBowlingBall = true;
+    public bool holdingBowlingBall = true;
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
