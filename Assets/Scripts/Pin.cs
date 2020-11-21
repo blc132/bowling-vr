@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour
 {
+
+    /// <summary>
+    /// Jak ustawimy flagę na true to zniszcz obiekt
+    /// </summary>
+    public bool remove;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,12 +18,14 @@ public class Pin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(remove)
+            Destroy(gameObject);
     }
 
     public void OnTouchFloor()
     {
         Debug.Log("Touched floor");
-        Destroy(gameObject);
+        if(gameObject != null)
+            Destroy(gameObject);
     }
 }
