@@ -1994,7 +1994,7 @@ GameObject:
   - component: {fileID: 2138392552}
   m_Layer: 0
   m_Name: BowlingBall
-  m_TagString: Untagged
+  m_TagString: BowlingBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

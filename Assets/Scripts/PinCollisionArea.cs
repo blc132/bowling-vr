@@ -24,6 +24,5 @@ public class PinCollisionArea : MonoBehaviour
         {
             pin.OnTouchFloor();
         }
-
     }
 }
