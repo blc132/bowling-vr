@@ -3,6 +3,7 @@ using System.Linq;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utils;
 
 public class GameController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameController : MonoBehaviour
     public GameObject pinPrefab;
 
     public int numberOfRounds = 10;
+    public GameObject walls;
+    public WallMaterialSet[] materialSets;
 
 
     private float gameTime = 6f;
@@ -43,6 +46,8 @@ public class GameController : MonoBehaviour
     {
         //Na starcie sceny czyli w sumie aplikacji pobierz wszystkie pozycje kręgli i je zapisz żeby potem na podstawie tych pozycji ustawiać nowe kręgle
         pinPositions = pins.Select(x => x.transform.position).ToList();
+
+        ChangeWallMaterialSet(0);
     }
 
     // Update is called once per frame
@@ -72,7 +77,7 @@ public class GameController : MonoBehaviour
             if (gameTimer <= -3f)
             {
                 //jak dalej mamy rundy do rozegrania
-                if(round < numberOfRounds)
+                if (round < numberOfRounds)
                     ManageSceneAfterThrow();
                 //jak już rozegraliśmy wszystkie rundy
                 else
@@ -86,12 +91,35 @@ public class GameController : MonoBehaviour
                     else
                     {
                         bonusText.text = $"Congrats, You scored {score} points!";
-                        scoreText.text= $"Game restarting in {(int)(gameTimer + 10)}";
+                        scoreText.text = $"Game restarting in {(int)(gameTimer + 10)}";
                         roundText.text = "";
                     }
                 }
             }
         }
+
+        if (Input.GetKeyDown("1"))
+            ChangeWallMaterialSet(0);
+
+        if (Input.GetKeyDown("2"))
+            ChangeWallMaterialSet(1);
+
+        if (Input.GetKeyDown("3"))
+            ChangeWallMaterialSet(2);
+    }
+
+    private void ChangeWallMaterialSet(int setNumber)
+    {
+        var wallsMeshRenderer = walls.GetComponent<Renderer>();
+
+        Material[] newMaterials = new Material[]{
+                materialSets[setNumber].FrontWallMaterial, // przednia ściana
+                materialSets[setNumber].FrontWallMaterial, // tylnia ściana za kręglami na torze
+                materialSets[setNumber].FrontWallMaterial, // element ozdobny
+                materialSets[setNumber].SideWallMaterial // ściany boczne
+            };
+
+        wallsMeshRenderer.materials = newMaterials;
     }
 
     private void CalculatedTotalScore()
