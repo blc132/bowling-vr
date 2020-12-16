@@ -19,6 +19,9 @@ public class GameController : MonoBehaviour
     public GameObject walls;
     public WallMaterialSet[] materialSets;
 
+    public AudioClip[] backgroundMusics;
+
+    private AudioSource audio;
 
     private float gameTime = 6f;
 
@@ -48,6 +51,10 @@ public class GameController : MonoBehaviour
         pinPositions = pins.Select(x => x.transform.position).ToList();
 
         ChangeWallMaterialSet(0);
+
+        audio = gameObject.GetComponent<AudioSource>();
+        audio.clip = backgroundMusics[0];
+        audio.Play();
     }
 
     // Update is called once per frame
@@ -106,6 +113,19 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("3"))
             ChangeWallMaterialSet(2);
+
+        if (Input.GetKeyDown("7"))
+            ChangeBackgroundMusic(0);
+
+        if (Input.GetKeyDown("8"))
+            ChangeBackgroundMusic(1);
+
+        if (Input.GetKeyDown("9"))
+            ChangeBackgroundMusic(2);
+
+        if (Input.GetKeyDown("0"))
+            ChangeBackgroundMusic(-1);
+
     }
 
     private void ChangeWallMaterialSet(int setNumber)
@@ -120,6 +140,17 @@ public class GameController : MonoBehaviour
             };
 
         wallsMeshRenderer.materials = newMaterials;
+    }
+
+    private void ChangeBackgroundMusic(int setNumber)
+    {
+        if (setNumber == -1)
+            audio.Stop();
+        else
+        {
+            audio.clip = backgroundMusics[setNumber];
+            audio.Play();
+        }
     }
 
     private void CalculatedTotalScore()
