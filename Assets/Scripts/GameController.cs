@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     public Player player;
     public GameObject pinPrefab;
 
-    public int numberOfRounds = 10;
+    public int numberOfRounds = 3;
     public GameObject walls;
     public WallMaterialSet[] materialSets;
 
@@ -360,9 +360,7 @@ public class GameController : MonoBehaviour
             strike = true;
             bonusText.text = "Strike!";
         }
-        else
-            bonusText.text = "";
-
+        else 
         if (secondTurn && basicTurnScore + firstRoundBasicScore == pins.Length)
         {
             spare = true;

@@ -12,10 +12,13 @@ public class Player : MonoBehaviour
     public bool holdingBowlingBall = true;
     //public bool holdingBowlingBall = false;
 
+    private AudioSource audioSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
-
+        this.audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,7 +47,19 @@ public class Player : MonoBehaviour
             {
                 holdingBowlingBall = false;
             }
+
+           
         }
+
+        if (OVRInput.GetUp(OVRInput.RawButton.RHandTrigger))
+        {
+            if (!this.audioSource.isPlaying)
+            {
+                this.audioSource.Play();
+            }
+           
+        }
+
     }
 
     public void GetBowlingBallToHand()
