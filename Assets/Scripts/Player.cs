@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
             {
                 holdingBowlingBall = false;
+                bowlingBallRigidBody.velocity = new Vector3(8f, 8f, 8f);
             }
 
            

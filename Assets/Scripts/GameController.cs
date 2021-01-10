@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
 
     private AudioSource audio;
 
-    private float gameTime = 15f;
+    private float gameTime = 17f;
 
     private float gameTimer;
 
@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
 
     public int materialCount = 0;
     public static int musicCount = 0;
+    public int materialWallCount = 0;
 
     public Material backgroundMat1;
     public Material backgroundMat2;
@@ -78,7 +79,7 @@ public class GameController : MonoBehaviour
         Debug.Log(levelMat);
 
         RenderSettings.skybox = backgroundMat1;
-        ChangeWallMaterialSet(0);
+        ChangeWallMaterialSet(2);
 
         audio = gameObject.GetComponent<AudioSource>();
         audio.clip = backgroundMusics[0];
@@ -245,11 +246,25 @@ public class GameController : MonoBehaviour
 
         }
 
-     //   if (OVRInput.GetDown(OVRInput.Button.One))
-     //   {
-     //       CalculatedTotalScore();
-     //       player.GetBowlingBallToHand();
-     //   }
+       if (OVRInput.GetDown(OVRInput.Button.One))
+       {
+            
+            switch (materialWallCount)
+            {
+                case 0:
+                    ChangeWallMaterialSet(1);
+                    materialWallCount = 1;
+                    break;
+                case 1:
+                    ChangeWallMaterialSet(2);
+                    materialWallCount = 2;
+                    break;
+                case 2:
+                    ChangeWallMaterialSet(0);
+                    materialWallCount = 0;
+                    break;
+            }
+        }
                 
 
         if (OVRInput.GetDown(OVRInput.Button.Four))
@@ -410,7 +425,7 @@ public class GameController : MonoBehaviour
         //Zresetuj flagi i timery
         playerThrewBall = false;
         scoreCalculated = false;
-        gameTime = 10f;
+        gameTime = 17f;
         gameTimer = 0f;
     }
 
